@@ -13,6 +13,7 @@
 		F879140A2679E524000853DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87914082679E524000853DE /* Main.storyboard */; };
 		F879140C2679E524000853DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F879140B2679E524000853DE /* Assets.xcassets */; };
 		F879140F2679E524000853DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F879140D2679E524000853DE /* LaunchScreen.storyboard */; };
+		F879141D267A2441000853DE /* ExtensionsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F879141C267A2441000853DE /* ExtensionsTemp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,8 @@
 		F879140B2679E524000853DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F879140E2679E524000853DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F87914102679E524000853DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F879141C267A2441000853DE /* ExtensionsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsTemp.swift; path = ../../../../ExtensionsTemp.swift; sourceTree = "<group>"; };
+		F8791420267A5225000853DE /* APNsTutorial-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "APNsTutorial-iOS.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +59,57 @@
 		F87914012679E524000853DE /* APNsTutorial-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F87914022679E524000853DE /* AppDelegate.swift */,
-				F87914042679E524000853DE /* SceneDelegate.swift */,
-				F87914062679E524000853DE /* ViewController.swift */,
-				F87914082679E524000853DE /* Main.storyboard */,
-				F879140B2679E524000853DE /* Assets.xcassets */,
-				F879140D2679E524000853DE /* LaunchScreen.storyboard */,
+				F8791420267A5225000853DE /* APNsTutorial-iOS.entitlements */,
 				F87914102679E524000853DE /* Info.plist */,
+				F879140B2679E524000853DE /* Assets.xcassets */,
+				F8791417267A2104000853DE /* Source */,
+				F8791416267A20FD000853DE /* Resource */,
 			);
 			path = "APNsTutorial-iOS";
+			sourceTree = "<group>";
+		};
+		F8791416267A20FD000853DE /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F8791419267A2114000853DE /* Storyboards */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		F8791417267A2104000853DE /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F87914022679E524000853DE /* AppDelegate.swift */,
+				F87914042679E524000853DE /* SceneDelegate.swift */,
+				F879141A267A242A000853DE /* Extensions */,
+				F8791418267A210B000853DE /* VCs */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		F8791418267A210B000853DE /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				F87914062679E524000853DE /* ViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		F8791419267A2114000853DE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F87914082679E524000853DE /* Main.storyboard */,
+				F879140D2679E524000853DE /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		F879141A267A242A000853DE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F879141C267A2441000853DE /* ExtensionsTemp.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87914072679E524000853DE /* ViewController.swift in Sources */,
+				F879141D267A2441000853DE /* ExtensionsTemp.swift in Sources */,
 				F87914032679E524000853DE /* AppDelegate.swift in Sources */,
 				F87914052679E524000853DE /* SceneDelegate.swift in Sources */,
 			);
@@ -286,14 +332,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "APNsTutorial-iOS/APNsTutorial-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T8C9SSEX5G;
+				DEVELOPMENT_TEAM = 4QG3GC35LA;
 				INFOPLIST_FILE = "APNsTutorial-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "hyun99999.APNsTutorial-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyun99999.APNsTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -305,14 +352,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "APNsTutorial-iOS/APNsTutorial-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T8C9SSEX5G;
+				DEVELOPMENT_TEAM = 4QG3GC35LA;
 				INFOPLIST_FILE = "APNsTutorial-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "hyun99999.APNsTutorial-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyun99999.APNsTutorial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
