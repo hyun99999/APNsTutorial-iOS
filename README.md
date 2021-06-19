@@ -175,3 +175,172 @@ firebase 같은경우는 두가지 지원한다.
 - p12 인증서를 쓰는 예시. 인증서는 1년마다 갱신해야 한다.
 
 [https://faith-developer.tistory.com/156](https://faith-developer.tistory.com/156)
+
+자 실제로 한번 푸시알림을 보내보겠습니다.
+  
+## 5. iOS 앱에 Firebase 추가하기
+
+iOS 앱을 내 Firebase 프로젝트와 안전하게 연결하기 위해선, 인증서 파일을 다운받아야 하고, 그걸 내 iOS 앱 안에 세팅해야 합니다. 
+
+- 프로젝트를 생성해주고
+- ios 앱을 추가해줍니다.
+
+<p align="center"><img width="300" alt="스크린샷 2021-06-19 오전 1 17 00" src="https://user-images.githubusercontent.com/69136340/122633638-90927300-d114-11eb-99ad-9bc116fa5c93.png"></p>
+
+- 앱을 등록해줍니다. (iOS 번들 ID 는 프로젝트파일에서 확인가능하다.)
+
+<p align="center"><img width="500" alt="스크린샷 2021-06-19 오전 1 18 36" src="https://user-images.githubusercontent.com/69136340/122633648-9ee08f00-d114-11eb-9a7d-5d2ff5dafd2a.png"></p>
+
+- GoogleService-info.plist 다운로드 해서 프로젝트에 추가해준다.
+<p align="center"><img width="550" alt="스크린샷 2021-06-19 오전 9 41 10" src="https://user-images.githubusercontent.com/69136340/122633702-d94a2c00-d114-11eb-9636-bc0c2bea6948.png"></p>
+
+<p align="center"><img width="500" alt="스크린샷 2021-06-19 오전 9 41 37" src="https://user-images.githubusercontent.com/69136340/122633707-e0713a00-d114-11eb-9227-54004e313fe6.png"></p>
+
+- Friebase SDK 를 추가한다.
+
+<p align="center"><img width="550" alt="스크린샷 2021-06-19 오전 9 45 15" src="https://user-images.githubusercontent.com/69136340/122633736-00086280-d115-11eb-8886-fedcad3d4cf6.png"></p>
+
+- 추가적으로 추후에 메시지 수신을 위해서 `Firebase/Messaging` 필요하니 지금 같이 추가해서 install 해주자.
+
+<p align="center"><img width="500" alt="스크린샷 2021-06-19 오후 2 30 23" src="https://user-images.githubusercontent.com/69136340/122633766-2b8b4d00-d115-11eb-87eb-4c37ac65d34b.png"></p>
+
+- AppDelegate.swift 파일에 `import Firebase` 와  `FirebaseApp.configure()` 를 추가해준다.
+
+<p align="center"><img width="550" alt="스크린샷 2021-06-19 오전 9 46 57" src="https://user-images.githubusercontent.com/69136340/122633754-1f06f480-d115-11eb-85cf-f84af3ffefce.png"></p>
+
+## 6. 알림 권한 요청
+
+- iOS 에서는 사용자의 동의 없는 notification 을 수신하지 못하도록 했기때문에 권한을 요청해야한다.
+
+ 보통 앱이 처음 실행될 때 물어보거나 푸시알림을 설정하는 단계에서 물어보면 된다.
+
+- import 추가
+
+```swift
+import Firebase
+import UserNotifications
+```
+
+- AppDelegate.swift
+
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+
+				// 기존에 적었던 파이어베이스 권한 설정
+        FirebaseApp.configure()
+        
+				// 푸시 권한 설정
+        UNUserNotificationCenter.current().delegate = self
+        Messaging.messaging().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter
+          .current()
+          .requestAuthorization(
+            options: authOptions,completionHandler: { (_, _) in }
+          )
+        application.registerForRemoteNotifications()
+        
+        return true
+    }
+```
+
+- 파이어베이스 메세지 전송의 토큰을 받을 수 있는 MessgingDelegate를 extension으로 분리해줍니다.
+
+```swift
+extension AppDelegate : MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("파이어베이스 토큰: \(fcmToken)")
+    }
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message: \(remoteMessage.appData)")
+    }
+}
+```
+
+- 파이어베이스의 노티가 수신될 수 있도록 한다.
+
+```swift
+extension AppDelegate : UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+}
+```
+
+**warning**
+
+iOS 14.0 에서 alert 옵션이 추천되지 않았다. 그래서 어떤 속성들이 존재하는지 살펴보았다.
+
+<p align ="center"><img width="800" alt="_2021-06-19__2 41 56" src="https://user-images.githubusercontent.com/69136340/122633809-69887100-d115-11eb-9409-07e47354a62b.png"></p>
+
+<p align ="center"><img width="400" alt="_2021-06-19__2 41 28" src="https://user-images.githubusercontent.com/69136340/122633808-668d8080-d115-11eb-9a13-98a558c81476.png"></p>
+
+badge :
+
+banner :
+
+list : 
+
+sound :
+
+alert :
+
+- 앱을 실행하게 되면 notifications 에 대한 권한을 요청한다. 그리고 앱설저에서 확인해보면 Allow Notificiations 가 설정되어있는 것을 확인 할 수 있다.
+
+<p align ="center"><img src ="https://user-images.githubusercontent.com/69136340/122633836-96d51f00-d115-11eb-8c98-5972478e173b.png" width ="250"> <img src ="https://user-images.githubusercontent.com/69136340/122633839-99377900-d115-11eb-88d3-768e3bd85908.png" width = "250"></p>
+
+## 7. Firebase iOS 앱 내에 인증서 등록
+  
+- 파이어베이스에 등록했던 프로젝트의 앱을 선택한다.
+  
+<p align ="center"><img width="300" alt="스크린샷 2021-06-19 오전 9 59 57" src="https://user-images.githubusercontent.com/69136340/122633883-de5bab00-d115-11eb-8a5a-552d9c6f80a4.png"></p>
+
+- 클라우드 메시징에서 인증서를 등록한다.
+
+<p align ="center"><img width="500" alt="스크린샷 2021-06-19 오전 10 00 53" src="https://user-images.githubusercontent.com/69136340/122633889-e582b900-d115-11eb-8b3c-b3d644ccb5c8.png"></p>
+
+- 인증키 즉 p8 파일을 사용하면 좋다고 하지만 나는 p12 파일만 있기때문에 APN 인증서에 인증서를 업로드 할 것이다.
+
+**A-1. Certificates 생성** 단계에서 개발 APN 과 프로덕션 APN 을 만들어주면 된다. 그리고 키체인에서 내보내기한 p12 파일을 업로드해준다.
+
+<p align ="center"><img width="500" alt="스크린샷 2021-06-19 오전 10 06 04" src="https://user-images.githubusercontent.com/69136340/122633901-f6cbc580-d115-11eb-88e3-46837a7dcf86.png"></p>
+
+## 8. Firebase 콘솔에서 테스트 메세지 보내기
+
+- Cloud Messaging 들어간다.
+
+<p align ="center"><img width="400" alt="스크린샷 2021-06-19 오전 10 11 24" src="https://user-images.githubusercontent.com/69136340/122633917-1367fd80-d116-11eb-8f8a-5f6a87890f09.png"></p>
+
+- 메시지 보내기
+
+<p align ="center"><img width="400" alt="스크린샷 2021-06-19 오전 10 13 27" src="https://user-images.githubusercontent.com/69136340/122633920-17941b00-d116-11eb-99be-6b9ac2ead210.png"></p>
+
+- 알림 제목과 텍스트를 설정해준다.
+
+<p align ="center"><img width="550" alt="스크린샷 2021-06-19 오후 3 08 54" src="https://user-images.githubusercontent.com/69136340/122633925-1c58cf00-d116-11eb-9acb-4407fa3035ec.png"></p>
+
+- 파이어베이스에 등록한 App 을 선택한다.
+
+<p align ="center"><img width="550" alt="스크린샷 2021-06-19 오후 3 10 50" src="https://user-images.githubusercontent.com/69136340/122633928-1f53bf80-d116-11eb-8aad-cc15041c0869.png"></p>
+
+- 예약할 옵션을 선택하고 다음을 눌러 진행을 해도 되고 검토를 해도 된다.
+
+<p align ="center"><img width="550" alt="스크린샷 2021-06-19 오후 3 12 51" src="https://user-images.githubusercontent.com/69136340/122633935-24187380-d116-11eb-871f-f5af5c19bacf.png">
+
+- 검토하게되면 다음과 같은 팝업창이 뜬다. 게시해보자.
+
+<p align ="center"><img width="450" alt="_2021-06-19__3 14 09" src="https://user-images.githubusercontent.com/69136340/122633936-27abfa80-d116-11eb-8cee-361ab5e4a074.png"></p>
+
+아래의 세가지 경우 모두 정상적으로 도착한다면 테스트 메시지 보내기 성공이다.
+
+- 앱이 켜져있을 때 (Foreground)
+- 앱이 켜져있지만 background 에 있을 때 (Background)
+- 앱이 꺼져있을 때 (Quit)
+
+<p align ="center"><img width="250" src ="https://user-images.githubusercontent.com/69136340/122633981-6d68c300-d116-11eb-87a0-1d1202fa5b48.png"></p>
