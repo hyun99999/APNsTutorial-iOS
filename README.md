@@ -293,7 +293,8 @@ alert :
 
 - 앱을 실행하게 되면 notifications 에 대한 권한을 요청한다. 그리고 앱설저에서 확인해보면 Allow Notificiations 가 설정되어있는 것을 확인 할 수 있다.
 
-<p align ="center"><img src ="https://user-images.githubusercontent.com/69136340/122633836-96d51f00-d115-11eb-8c98-5972478e173b.png" width ="250"> <img src ="https://user-images.githubusercontent.com/69136340/122633839-99377900-d115-11eb-88d3-768e3bd85908.png" width = "250"></p>
+<p align ="center"><img width="250" src="https://user-images.githubusercontent.com/69136340/122634920-edddf280-d11b-11eb-9c2e-02ebe3e020e8.png"><img width="250" src="https://user-images.githubusercontent.com/69136340/122634866-bbcc9080-d11b-11eb-9584-05e8b703e987.png">
+</p>
 
 ## 7. Firebase iOS 앱 내에 인증서 등록
   
