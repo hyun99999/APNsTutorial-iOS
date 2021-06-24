@@ -28,9 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           .requestAuthorization(
             options: authOptions,completionHandler: { (_, _) in }
           )
-        application.registerForRemoteNotifications()
+        UIApplication.shared.registerForRemoteNotifications()
         
         return true
+    }
+    
+    func application(_ application: UIApplication,
+                didRegisterForRemoteNotificationsWithDeviceToken
+                    deviceToken: Data) {
+//       self.sendDeviceTokenToServer(data: deviceToken)
+    }
+
+    // Sent to the delegate when APNs cannot successfully complete the registration process.
+    func application(_ application: UIApplication,
+                didFailToRegisterForRemoteNotificationsWithError
+                    error: Error) {
+       // Try again later.
     }
 
     // MARK: UISceneSession Lifecycle
