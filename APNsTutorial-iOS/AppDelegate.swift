@@ -13,8 +13,6 @@ import Firebase
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
@@ -72,8 +70,33 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         completionHandler([.banner, .list, .sound])
     }
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+           didReceive response: UNNotificationResponse,
+           withCompletionHandler completionHandler:
+             @escaping () -> Void) {
 
-    func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
+       // Get the meeting ID from the original notification.
+       let userInfo = response.notification.request.content.userInfo
+       let meetingID = userInfo["MEETING_ID"] as! String
+       let userID = userInfo["USER_ID"] as! String
+
+       // Perform the task associated with the action.
+       switch response.actionIdentifier {
+       case "ACCEPT_ACTION":
+          print("Accept action - meetingID: \(meetingID), userID: \(userID)")
+          break
+
+       case "DECLINE_ACTION":
+            print("Decline action - meetingID: \(meetingID), userID: \(userID)")
+          break
+
+       // Handle other actions…
+
+       default:
+          break
+       }
+
+       // Always call the completion handler when done.
+       completionHandler()
     }
 }

@@ -15,8 +15,28 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setCutomAction()
         requestNotificationAuthorization()
         sendNotification(seconds: 10)
+    }
+    
+    func setCutomAction() {
+        let acceptAction = UNNotificationAction(identifier: "ACCEPT_ACTION",
+              title: "Accept",
+              options: UNNotificationActionOptions(rawValue: 0))
+        let declineAction = UNNotificationAction(identifier: "DECLINE_ACTION",
+              title: "Decline",
+              options: UNNotificationActionOptions(rawValue: 0))
+        
+        let meetingInviteCategory =
+              UNNotificationCategory(identifier: "TEST_NOTIFICATION",
+              actions: [acceptAction, declineAction],
+              intentIdentifiers: [],
+              hiddenPreviewsBodyPlaceholder: "",
+              options: .customDismissAction)
+
+        // Register the notification type.
+        userNotificationCenterr.setNotificationCategories([meetingInviteCategory])
     }
 
     func requestNotificationAuthorization() {
@@ -36,6 +56,8 @@ class ViewController: UIViewController {
         
         notificationContent.title = "알림 테스트 타이틀"
         notificationContent.body = "알림 테스트 바디"
+        notificationContent.userInfo = ["MEETING_ID" : "meetingID",
+                            "USER_ID" : "userID" ]
         notificationContent.categoryIdentifier = "TEST_NOTIFICATION"
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
