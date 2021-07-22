@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,43 +13,48 @@
             <objects>
                 <viewController id="M4Y-Lb-cyx" userLabel="Notification View Controller" customClass="NotificationViewController" customModule="NotifiationContentExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
-                                <rect key="frame" x="0.0" y="44" width="320" height="56"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxY-Yv-4yi">
-                                <rect key="frame" x="139" y="39.5" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lvg-BC-IUs">
+                                <rect key="frame" x="139" y="64" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
+                                <rect key="frame" x="116" y="105" width="88" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2BE-c3-nQJ"/>
-                        <color key="backgroundColor" red="0.45882353186607361" green="0.74901962280273438" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
-                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="bottom" secondItem="GcN-lo-r42" secondAttribute="bottom" symbolic="YES" id="0Q0-KW-PJ6"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" symbolic="YES" id="6Vq-gs-PHe"/>
-                            <constraint firstItem="bxY-Yv-4yi" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="I22-zP-9RO"/>
-                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" symbolic="YES" id="L8K-9R-egU"/>
-                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="2BE-c3-nQJ" secondAttribute="top" symbolic="YES" id="mYS-Cv-VNx"/>
-                            <constraint firstItem="bxY-Yv-4yi" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="w2Q-EN-d74"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Lvg-BC-IUs" secondAttribute="bottom" constant="20" id="1WZ-WN-U4I"/>
+                            <constraint firstItem="Lvg-BC-IUs" firstAttribute="top" secondItem="2BE-c3-nQJ" secondAttribute="top" constant="20" id="BFg-73-Gq6"/>
+                            <constraint firstItem="Lvg-BC-IUs" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="Oww-Mh-Ott"/>
+                            <constraint firstItem="Lvg-BC-IUs" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="YGZ-uS-LHT"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="eDN-MP-heI"/>
+                            <constraint firstItem="GcN-lo-r42" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="m3n-Ee-CkY"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="100"/>
+                    <size key="freeformSize" width="320" height="200"/>
                     <connections>
-                        <outlet property="label" destination="GcN-lo-r42" id="lpW-cU-7IG"/>
-                        <outlet property="testLabel" destination="bxY-Yv-4yi" id="Svb-5R-Ifd"/>
+                        <outlet property="bodyLabel" destination="GcN-lo-r42" id="z0C-Yn-r6a"/>
+                        <outlet property="titleLabel" destination="Lvg-BC-IUs" id="iyf-Ya-jLb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="68" y="41"/>
+            <point key="canvasLocation" x="66.666666666666671" y="40.848214285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -11,8 +11,8 @@ import UserNotificationsUI
 
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
 
-    @IBOutlet var label: UILabel?
-    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel?
+    @IBOutlet weak var bodyLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +21,8 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ notification: UNNotification) {
         
-        self.label?.text = notification.request.content.body
-        self.testLabel.text = notification.request.content.title
+        self.titleLabel?.text = notification.request.content.title
+        self.bodyLabel.text = notification.request.content.body
     }
 
 }

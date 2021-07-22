@@ -24,10 +24,12 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
+			<key>UNNotificationExtensionDefaultContentHidden</key>
+			<string>YES</string>
 			<key>UNNotificationExtensionCategory</key>
-			<string>myNotificationCategory</string>
+			<string>TEST_NOTIFICATION</string>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
-			<real>1</real>
+			<real>0.5</real>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
 		<string>MainInterface</string>
